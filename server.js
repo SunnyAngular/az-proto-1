@@ -6,7 +6,11 @@ const path = require('path');
 const app = express();
 const port = process.env.PORT || 3001;
 
-app.use(cors());
+app.use(cors({
+    origin: 'http://az-proto-1.azurewebsites.net',
+    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+  }));
+  
 app.use(bodyParser.json());
 
 //Database connection
