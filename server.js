@@ -10,6 +10,9 @@ const port = process.env.PORT || 3001;
 app.use(bodyParser.json());
 app.use(cors());
 
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, 'build')));
+
 // Database configuration
 const databaseconfig = {
     user: 'az-proto-1',
@@ -72,9 +75,6 @@ app.delete('/api/users/:id', async (req, res) => {
         res.status(500).send('Server error');
     }
 });
-
-// Serve static files from the React app
-app.use(express.static(path.join(__dirname, 'build')));
 
 // The "catchall" handler: for any request that doesn't match the above, send back React's index.html file.
 app.get('*', (req, res) => {

@@ -8,11 +8,12 @@ const AddRowForm = ({ onUserAdded }) => {
     const [City, setCity] = useState('');
     const [Email, setEmail] = useState('');
     const [Phone_Number, setPhoneNumber] = useState('');
+    const apiUrl = process.env.REACT_APP_API_URL;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:3001/api/users', {
+            await axios.post(`${apiUrl}/users`, {
                 First_Name,
                 Last_name,
                 City,

@@ -5,10 +5,11 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 const RowsTable = () => {
     const [users, setUsers] = useState([]);
+    const apiUrl = process.env.REACT_APP_API_URL;
 
     const fetchUsers = async () => {
         try {
-            const response = await axios.get('http://localhost:3001/api/users');
+            const response = await axios.get(`${apiUrl}/users`);
             setUsers(response.data);
         } catch (error) {
             console.error('Error fetching users:', error);
@@ -17,7 +18,7 @@ const RowsTable = () => {
 
     const deleteUser = async (id) => {
         try {
-            await axios.delete(`http://localhost:3001/api/users/${id}`);
+            await axios.delete(`${apiUrl}/users/${id}`);
             fetchUsers();
         } catch (error) {
             console.error('Error deleting user:', error);
