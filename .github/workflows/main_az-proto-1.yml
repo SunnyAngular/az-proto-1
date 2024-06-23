@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest  # Use Ubuntu for build jobs for consistency and better disk management
 
     steps:
       - uses: actions/checkout@v4
@@ -30,11 +30,16 @@ jobs:
         run: npm run build
         working-directory: ./client
 
-      - name: Move client build to server directory (Windows)
-        if: runner.os == 'Windows'
+      - name: Move client build to server directory
         run: |
-          mkdir build
-          xcopy .\client\build .\build /E /H /C /I
+          mkdir -p ./build
+          cp -a ./client/build/. ./build/
+
+      - name: Clean up unnecessary files
+        run: |
+          rm -rf ./client/node_modules
+          rm -rf ./client/build
+          rm -rf ./node_modules
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
@@ -54,7 +59,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: node-app
-
+      
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v2
         id: deploy-to-webapp
