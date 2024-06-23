@@ -6,10 +6,13 @@ const path = require('path');
 const app = express();
 const port = process.env.PORT || 3001;
 
-app.use(cors({
-    origin: 'https://az-proto-1.azurewebsites.net',
-    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-  }));
+const corsOptions = {
+    origin: 'https://az-proto-1.azurewebsites.net', // Your Azure Web App URL
+    optionsSuccessStatus: 200
+  };
+  
+app.use(cors(corsOptions));
+
 app.use(bodyParser.json());
 
 //Database connection
