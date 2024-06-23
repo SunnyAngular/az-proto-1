@@ -27,6 +27,19 @@ sql.connect(databaseconfig, (err) => {
     if (err) console.log('Database Connection Failed!',err);
 });
 
+// Serve the static files from the React app
+app.use(express.static(path.join(__dirname, 'client/build')));
+
+// An example API endpoint
+app.get('/api/hello', (req, res) => {
+  res.send({ message: 'Hello from the server!' });
+});
+
+// All other requests should be handled by the React app
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+});
+
 // create a new database
 app.post('/api/users', async (req, res) => {
     const {First_Name,Last_Name,City,Email,Phone_Number} = req.body;
