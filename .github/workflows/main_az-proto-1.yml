@@ -30,10 +30,11 @@ jobs:
         run: npm run build
         working-directory: ./client
 
-      - name: Move client build to server directory
+      - name: Move client build to server directory (Windows)
+        if: runner.os == 'Windows'
         run: |
-          mkdir -p ./build
-          cp -a ./client/build/. ./build/
+          mkdir build
+          xcopy .\client\build .\build /E /H /C /I
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
