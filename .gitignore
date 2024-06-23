@@ -10,7 +10,7 @@
 .env
 
 # Build directory
-/client/build
+#/client/build
 
 # Ignore coverage directory
 /coverage
