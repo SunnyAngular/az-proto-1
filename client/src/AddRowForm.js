@@ -8,14 +8,16 @@ const AddRowForm = ({ onUserAdded }) => {
     const [City, setCity] = useState('');
     const [Email, setEmail] = useState('');
     const [Phone_Number, setPhoneNumber] = useState('');
-    const apiUrl = process.env.REACT_APP_API_URL;
+    const address = process.env.NODE_ENV === 'development'
+        ? process.env.REACT_APP_API_URL
+        : window.location.protocol + '//' + window.location.host;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post(`${apiUrl}/users`, {
+            await axios.post(`${address}/api/users`, {
                 First_Name,
-                Last_name,
+                Last_Name,
                 City,
                 Email,
                 Phone_Number
@@ -46,7 +48,7 @@ const AddRowForm = ({ onUserAdded }) => {
                 />
                 <TextField
                     label="Last Name"
-                    value={Last_name}
+                    value={Last_Name}
                     onChange={(e) => setLastName(e.target.value)}
                     fullWidth
                     margin="normal"

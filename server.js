@@ -5,7 +5,10 @@ const cors = require('cors');
 const path = require('path');
 
 const app = express();
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 8080;
+
+process.env.appUrl = 'http://localhost:8080';
+
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -37,13 +40,13 @@ sql.connect(databaseconfig, err => {
 
 // API routes
 app.post('/api/users', async (req, res) => {
-    const { First_Name, Last_name, City, Email, Phone_Number } = req.body;
+    const { First_Name, Last_Name, City, Email, Phone_Number } = req.body;
 
     try {
         const request = new sql.Request();
         await request.query(`
-            INSERT INTO users (First_Name, Last_name, City, Email, Phone_Number)
-            VALUES ('${First_Name}', '${Last_name}', '${City}', '${Email}', '${Phone_Number}')
+            INSERT INTO users (First_Name, Last_Name, City, Email, Phone_Number)
+            VALUES ('${First_Name}', '${Last_Name}', '${City}', '${Email}', '${Phone_Number}')
         `);
         res.status(201).send('User created successfully');
     } catch (err) {
@@ -68,7 +71,7 @@ app.delete('/api/users/:id', async (req, res) => {
 
     try {
         const request = new sql.Request();
-        await request.query(`DELETE FROM users WHERE id = ${id}`);
+        await request.query(`DELETE FROM users WHERE user_id = ${id}`);
         res.status(200).send('User deleted successfully');
     } catch (err) {
         console.error('Error deleting user:', err);

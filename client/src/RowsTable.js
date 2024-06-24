@@ -5,11 +5,13 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 const RowsTable = () => {
     const [users, setUsers] = useState([]);
-    const apiUrl = process.env.REACT_APP_API_URL;
+    const address = process.env.NODE_ENV === 'development'
+        ? process.env.REACT_APP_API_URL
+        : window.location.protocol + '//' + window.location.host;
 
     const fetchUsers = async () => {
         try {
-            const response = await axios.get(`${apiUrl}/users`);
+            const response = await axios.get(`${address}/api/users`);
             setUsers(response.data);
         } catch (error) {
             console.error('Error fetching users:', error);
@@ -18,7 +20,7 @@ const RowsTable = () => {
 
     const deleteUser = async (id) => {
         try {
-            await axios.delete(`${apiUrl}/users/${id}`);
+            await axios.delete(`${address}/api/users/${id}`);
             fetchUsers();
         } catch (error) {
             console.error('Error deleting user:', error);
@@ -28,7 +30,7 @@ const RowsTable = () => {
     useEffect(() => {
         const fetchUsers = async () => {
           try {
-            const response = await fetch(`${apiUrl}/users`);
+            const response = await fetch(`${address}/api/users`);
             const result = await response.json();
             setUsers(result);
           } catch (error) {
@@ -58,15 +60,15 @@ const RowsTable = () => {
                 </TableHead>
                 <TableBody>
                     {users.map(user => (
-                        <TableRow key={user.id}>
-                            <TableCell>{user.id}</TableCell>
+                        <TableRow key={user.user_id}>
+                            <TableCell>{user.user_id}</TableCell>
                             <TableCell>{user.First_Name}</TableCell>
-                            <TableCell>{user.Last_name}</TableCell>
+                            <TableCell>{user.Last_Name}</TableCell>
                             <TableCell>{user.City}</TableCell>
                             <TableCell>{user.Email}</TableCell>
                             <TableCell>{user.Phone_Number}</TableCell>
                             <TableCell>
-                                <IconButton color="secondary" onClick={() => deleteUser(user.id)}>
+                                <IconButton color="secondary" onClick={() => deleteUser(user.user_id)}>
                                     <DeleteIcon />
                                 </IconButton>
                             </TableCell>
