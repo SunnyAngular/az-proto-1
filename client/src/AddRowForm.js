@@ -4,7 +4,7 @@ import { TextField, Button, Box, Paper, Typography } from '@mui/material';
 
 const AddRowForm = ({ onUserAdded }) => {
     const [First_Name, setFirstName] = useState('');
-    const [Last_name, setLastName] = useState('');
+    const [Last_Name, setLastName] = useState('');
     const [City, setCity] = useState('');
     const [Email, setEmail] = useState('');
     const [Phone_Number, setPhoneNumber] = useState('');

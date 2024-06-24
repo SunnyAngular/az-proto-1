@@ -39,7 +39,7 @@ const RowsTable = () => {
         };
     
         fetchUsers();
-      }, [apiUrl]);
+      }, [address]);
 
     return (
         <TableContainer component={Paper} style={{ maxHeight: 400, overflow: 'auto' }}>
