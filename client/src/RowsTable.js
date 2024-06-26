@@ -7,7 +7,7 @@ const RowsTable = () => {
     const [users, setUsers] = useState([]);
     const address = process.env.NODE_ENV === 'development'
         ? process.env.REACT_APP_API_URL
-        : window.location.protocol + '//' + window.location.host;
+        : window.location.protocol + '//' + window.location.host; 
 
     const fetchUsers = async () => {
         try {

@@ -29,7 +29,7 @@ const AddRowForm = ({ onUserAdded }) => {
             setEmail('');
             setPhoneNumber('');
         } catch (error) {
-            console.error('Error adding user:', error);
+            console.error('Error adding user:', error); 
         }
     };
 

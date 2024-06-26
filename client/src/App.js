@@ -18,7 +18,7 @@ const App = () => {
             <Box display="flex" justifyContent="space-between" alignItems="flex-start">
                 <Box flex={1} marginRight={2}>
                     <AddRowForm onUserAdded={handleUserAdded} />
-                </Box>
+                </Box> 
                 <Box flex={2}>
                     <RowsTable key={refresh} />
                 </Box>
